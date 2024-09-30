@@ -29,7 +29,7 @@ const Form = () => {
     //подверждаем что юзер зашел в свой кабинет 
     const [agreeDataUser,setAgreeDataUser] = useState<string>('');
     //URL
-    const URL = 'http://localhost:5001/'; 
+    const URL = 'http://protocol.coderoff.uz:5001/'; 
     const navigate = useNavigate();
     // POST request for register user
     const postRequest = async () => {

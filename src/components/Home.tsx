@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import Slider from 'react-slick';
 import userPhoto from '../assets/user.webp';
+import { useNavigate } from "react-router-dom";
 const Home: React.FC = () => {
   // var settings = {
   //   dots: true,
@@ -83,7 +84,7 @@ const Home: React.FC = () => {
   const userId = Cookie.get('userId');
   const UserTeamName = Cookie.get('auth');
   //URL 
-  const url = 'http://localhost:5001/'
+  const url = 'http://protocol.coderoff.uz:5001/'
   // TOKEN
   const token = '5998034134:AAGaoApUgNL8HMsHMIpxfN2EtV2yOYodUK8';
   const getPlayers = async () => {
@@ -106,7 +107,7 @@ const Home: React.FC = () => {
   // get User
   const getUser = async () => {
     try{
-      const response = await axios.get(URL+'api/kubok-register/'+userId);
+      const response = await axios.get(url+'api/kubok-register/'+userId);
       return response.data;
     }
     catch(e:any){
@@ -114,10 +115,18 @@ const Home: React.FC = () => {
       throw e;      
     }
   }
- 
 
+ 
+  const navigate = useNavigate();
   useEffect(()=>{
-    
+    if (Cookie.get('auth')) {
+      // Если куки есть, перенаправляем на главную
+      const lsTeamName = Cookie.get('auth');
+      navigate(`/user/${lsTeamName}`);
+    } else {
+      // Если куки нет, перенаправляем на страницу формы
+      navigate('/form');
+    }
     getPlayers()
     .then(res=>setPlayers(res))
     .catch(e=>console.log(e));
@@ -146,6 +155,7 @@ const Home: React.FC = () => {
     }
    
   },[]);
+  
   
   useEffect(()=>{
     if(firstname !== '' && lastname !== '' && age !== '' && photo !== null) return setBtnActive('active');
