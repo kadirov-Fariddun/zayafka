@@ -306,7 +306,7 @@ a{
 .profile-warpper{
   padding: 20px 20px 10px 20px;
   width: 100%;
-  margin-bottom: 70px;
+  margin-bottom: 100px;
   @media(max-width:500px){
     padding: 20px 0;
   }
@@ -496,6 +496,7 @@ a{
   align-items: center;
   justify-content: center;
   padding: 0px 20px;
+  z-index: 11;
   // active-modal
   &.active-modal{
     display: flex;
@@ -651,6 +652,7 @@ a{
   border: 2px solid #26a380;
   outline: none;
   transition: .3s;
+  z-index: 10;
   &:hover{
     transition: .3s;
     transform: translateY(-3px);
@@ -710,7 +712,7 @@ a{
   &.active{
     transition: .3s;
     opacity: 1;
-    z-index: 999;
+    z-index: 0;
   }
 }
 
